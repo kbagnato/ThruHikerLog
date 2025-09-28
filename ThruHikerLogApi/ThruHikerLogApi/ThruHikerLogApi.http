@@ -1,0 +1,6 @@
+@ThruHikerLogApi_HostAddress = http://localhost:5039
+
+GET {{ThruHikerLogApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

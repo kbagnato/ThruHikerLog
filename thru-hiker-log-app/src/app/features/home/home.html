@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="sidebar">
+    <!-- todo move to header comp -->
+    <div class="name">thru hiker log app</div>
+
+    @if (!(trails$ | async)) {
+    <div>
+      <!-- todo extract spinner comp from global overlay? or use skeletons? -->
+      loading...
+    </div>
+    } @else {
+       @for (trail of trails$ | async; track trail)
+       {
+    <!-- TODO click is broken bc of the dropdown beneath it -->
+    <div (click)="editTrail(trail)" class="trail">
+      {{ trail.name }}
+      <button type="button" (click)="toggleDropdown(trail.id!)">⋮</button>
+
+      @if (selectedTrailId === trail.id) {
+      <div class="dropdown">
+        <button (click)="editTrail(trail)">Edit</button>
+        <button (click)="deleteTrail(trail)">Delete</button>
+      </div>
+      }
+    </div>
+    } @empty {
+    <p>No trails to display.</p>
+    } }
+  </div>
+
+  <div class="content">
+    select a trail log or <button type="button" (click)="onCreate()">start a new one</button>
+  </div>
+</div>

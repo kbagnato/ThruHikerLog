@@ -1,0 +1,29 @@
+@let trail = trail$ | async; @if (trail) {
+{{ trail.name }}
+
+<br />
+
+@if (trail.entries) {
+<div>you have {{ trail.entries.length }} entries for this trail</div>
+
+<!-- render last 3 entries -->
+@let entries = trail.entries | slice:-3; @for (entry of entries; track entry.id) {
+<div class="card">
+  <strong>{{ entry.name }}</strong> - {{ entry.startTime | date : 'shortTime' }} to
+  {{ entry.endTime | date : 'shortTime' }}<br />
+  {{ entry.notes }}
+</div>
+<br />
+} } @else {
+<div>you have no entries for this trail</div>
+}
+
+<button type="button" (click)="goToAddEntry()">Add Entry</button>
+
+} @else {
+<!-- loading trail -->
+<div>Loading...</div>
+}
+
+<!-- todo add footer? -->
+<button type="button" (click)="goHome()">&#x2302; Home</button>
