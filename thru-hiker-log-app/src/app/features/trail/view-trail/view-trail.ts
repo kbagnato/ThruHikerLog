@@ -17,11 +17,11 @@ export class ViewTrail {
   public trail$?: Observable<ITrail | null>;
   private id: number | null = null;
 
-  constructor(private store: Store, private route: ActivatedRoute, private router: Router) {}
+  constructor(private store: Store, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.trail$ = this.store.select(selectTrailDetails);
-    this.id = this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.params['trailId'];
     if (this.id) {
       this.store.dispatch(TrailActions.loadTrailDetails({ id: this.id }));
     }
@@ -37,5 +37,20 @@ export class ViewTrail {
   /** Navigate to add entry page for the selected trail */
   goToAddEntry() {
     this.router.navigate(['trail', this.id!, 'add-entry']);
+  }
+
+  /** Navigate to edit entry page for the selected trail and entry */
+  goToEditEntry(entryId: number) {
+    this.router.navigate(['trail', this.id!, 'entry', entryId]);
+  }
+
+  /** Navigate to edit trail page for the selected trail */
+  goToEditTrail() {
+    this.router.navigate(['trail', this.id, 'edit']);
+  }
+
+  /** Delete an entry */
+  deleteEntry(entryId: number) {
+    alert('delete entry - todo');
   }
 }

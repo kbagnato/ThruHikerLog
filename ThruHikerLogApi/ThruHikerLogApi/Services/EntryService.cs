@@ -26,5 +26,28 @@ namespace ThruHikerLogApi.Services
         {
             return _entryRepo.CreateEntry(entry);
         }
+
+        public Entry GetEntryDetails(int entryId, int trailId)
+        {
+            return _entryRepo.GetEntryDetails(entryId, trailId);
+        }
+
+        /// <summary>
+        /// Updates an entry
+        /// </summary>
+        /// <param name="entry"></param>
+        public void UpdateEntry(int entryId, int trailId, Entry entry)
+        {
+            _entryRepo.UpdateEntry(entryId, trailId, entry);
+        }
+
+        /// <summary>
+        /// Updates an entry
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteEntry(int entryId, int trailId)
+        {
+            _entryRepo.DeleteEntry(entryId, trailId);
+        }
     }
 }

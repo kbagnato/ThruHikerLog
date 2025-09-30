@@ -6,5 +6,10 @@ export interface IEntry {
   endTime: Date;
   startMileage: number;
   endMileage: number;
-  notes: string;
+  elevationGain?: number;
+  elevationLoss?: number;
+  weather?: string;
+  temperature?: number;
+  notes?: string;
+  dayNumber?: number; // computed field, not stored in DB
 }

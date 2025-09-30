@@ -29,3 +29,11 @@ export const loadTrailDetailsSuccess = createAction('[Trail] Load trail details 
 export const loadTrailDetailsFailure = createAction('[Trail] Load trail details failure',
   props<{ error: any }>()
 );
+
+export const updateTrail = createAction('[Trail] Update trail',
+  props<{ trail: ITrail }>()
+);
+export const updateTrailSuccess = createAction('[Trail] Update trail success');
+export const updateTrailFailure = createAction('[Trail] Update trail failure',
+  props<{ error: any }>()
+);

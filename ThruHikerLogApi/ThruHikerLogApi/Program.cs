@@ -5,7 +5,7 @@ using ThruHikerLogApi.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<TrailSerrvice, TrailSerrvice>();
+builder.Services.AddSingleton<TrailService, TrailService>();
 builder.Services.AddSingleton<TrailRepo, TrailRepo>();
 builder.Services.AddSingleton<EntryRepo, EntryRepo>();
 builder.Services.AddSingleton<EntryService, EntryService>();
@@ -40,12 +40,14 @@ using (var conn = new SqliteConnection("Data Source=thruhikerlog.db"))
             LengthType TEXT,
             Description TEXT,
             GearListUrl TEXT
+            StartDate DATETIME,
+            EndDate DATETIME
         );
     ";
     tableCmd.ExecuteNonQuery();
 
     tableCmd.CommandText = @"
-        CREATE TABLE IF NOT EXISTS DailyEntries (
+        CREATE TABLE IF NOT EXISTS Entries (
             Id INTEGER PRIMARY KEY AUTOINCREMENT,
             TrailId INTEGER NOT NULL,
             Name TEXT,

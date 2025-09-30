@@ -1,29 +1,86 @@
-@let trail = trail$ | async; @if (trail) {
-{{ trail.name }}
+@let trail = trail$ | async;
+@if (trail) {
+  <button type="button" (click)="goHome()">🏠 Home</button>
+  
+  <div class="card details">
+    <div>
+      <div class="trail-name">
+        {{ trail.name }}
+      </div>
+      {{ trail.location }} <br />  
 
-<br />
+      <div>
+        Description: {{ trail.description }}
+      </div>
+    </div>
+    
+    <div>
+      Start Date: {{ trail.startDate | date : 'longDate' }} <br />
+      End Date: {{ trail.endDate | date : 'longDate' }} <br />
+      Total Distance: {{ trail.length }} {{trail.lengthType }} <br />
+      <!-- TODO add these fields -->
+      <!-- Total Elevation Gain: {{ trail.totalElevationGain }} ft<br />
+      Total Elevation Loss: {{ trail.totalElevationLoss }} ft<br /> -->
+    </div>
 
-@if (trail.entries) {
-<div>you have {{ trail.entries.length }} entries for this trail</div>
+    <div class="trail-btns">
+      <!-- <button type="button" (click)="goHome()">🏠 Home</button> -->
+      <button type="button" (click)="goToEditTrail()">✏️ Edit Trail</button>
+      <button type="button" (click)="goToAddEntry()">➕ Add Entry</button>
+    </div>
+  </div>
+  
+  @if (trail.entries) {
+  <div>You have {{ trail.entries.length }} total entries for this trail.</div>
 
-<!-- render last 3 entries -->
-@let entries = trail.entries | slice:-3; @for (entry of entries; track entry.id) {
-<div class="card">
-  <strong>{{ entry.name }}</strong> - {{ entry.startTime | date : 'shortTime' }} to
-  {{ entry.endTime | date : 'shortTime' }}<br />
-  {{ entry.notes }}
-</div>
-<br />
-} } @else {
-<div>you have no entries for this trail</div>
-}
+  @for (entry of trail.entries; track entry.id) {
+    <div class="card entry">
+      <!-- entry buttons -->
+      <div class="float-right">
+        <button type="button" (click)="goToEditEntry(entry.id!)">✏️ Edit</button>
+        <button type="button" (click)="deleteEntry(entry.id!)">🗑️ Delete</button>
+      </div>
 
-<button type="button" (click)="goToAddEntry()">Add Entry</button>
+      <div class="header">
+        Day {{ entry.dayNumber }} - 
+     
+        <span>{{ entry.name }}</span>
+        <br/>
+        </div>
+        
+        <div>
+        {{ entry.startTime | date : 'mediumDate' }},
+        {{entry.startTime | date : 'shortTime'}} to {{ entry.endTime | date : 'shortTime' }}
+      </div>
+      <div>Distance: {{ entry.endMileage - entry.startMileage }} miles</div>
+      <!-- <div>Elevation Gain: {{ entry.elevationGain }} ft</div>
+      <div>Elevation Loss: {{ entry.elevationLoss }} ft</div>
+      <div>Location: {{ entry.location }}</div>
+      <div>Weather: {{ entry.weather }}</div> -->
+      <br/>
+      <div>
+        Notes:
+        {{ entry.notes }}
+      </div>
+    </div>
+  } 
 
+  <div>
+    TODO add pagination <br/>
+    <!-- <button type="button" (click)="previousPage()" [disabled]="pageNumber === 1">◀ Previous</button>
+    <button type="button" (click)="nextPage()" [disabled]="(trail.entries.length < pageSize)">Next ▶</button>
+    Page {{ pageNumber }} <br/> -->
+    <button type="button" disabled class="disabled">◀ Previous</button>
+    Page 1 
+    <button type="button" disabled class="disabled">Next ▶</button>
+  </div>
 } @else {
-<!-- loading trail -->
-<div>Loading...</div>
+   <div>you have no entries for this trail</div>
+  }
+
+  } @else {
+    <!-- loading trail -->
+    <div>Loading...</div>
 }
 
 <!-- todo add footer? -->
-<button type="button" (click)="goHome()">&#x2302; Home</button>

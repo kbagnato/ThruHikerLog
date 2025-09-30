@@ -9,6 +9,6 @@ export interface ITrail {
   startDate: Date;
   endDate?: Date;
   gearListUrl: string;
-  notes: string;
+  description: string;
   entries?: IEntry[];
 }

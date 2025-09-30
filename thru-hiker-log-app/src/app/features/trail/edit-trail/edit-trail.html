@@ -1,5 +1,84 @@
-{{ trail$ | async | json}}
-
-
+@let trail = (trail$ | async);
 <button type="button" (click)="goHome()">
   &#x2302; Home</button>
+  
+  @if (!trail || trail == null) {
+    loading...
+  } @else {
+ 
+  <div class="card form">
+    <form #newTrailForm="ngForm" name="newTrailForm" (ngSubmit)="onSubmit(newTrailForm)">
+      <label>
+        trail name
+        <div>
+        <input type="text" [(ngModel)]="trail.name" name="name" required placeholder="the long trail" />
+      </div>
+    </label>
+    <br />
+    
+    <label>
+      location
+      <div>
+        <input type="text" [(ngModel)]="trail.location" name="location" placeholder="vermont" />
+      </div>
+    </label>
+    <br />
+
+    <label>
+      length
+      <div>
+        <input type="number" [(ngModel)]="trail.length" name="length" placeholder="272" />
+      </div>
+    </label>
+    <br />
+    
+    <label>
+      length type
+      <div>
+        <input type="text" [(ngModel)]="trail.lengthType" name="lengthType" placeholder="miles" />
+      </div>
+    </label>
+    <br />
+    
+    <label>
+      start date
+      <div>
+        <input type="date" [(ngModel)]="trail.startDate" name="startDate" />
+      </div>
+    </label>
+    
+    <label>
+      end date
+      <div>
+        <input type="date" [(ngModel)]="trail.endDate" name="endDate" />
+        <button type="button" (click)="clearEndDate(newTrailForm)">clear</button>
+      </div>
+    </label>
+    <br />
+    
+    <label>
+      gear list
+      <div>
+        <input type="text" [(ngModel)]="trail.gearListUrl" name="gearListUrl" placeholder="lighterpack.com/r/2lkx1n" />
+      </div>
+    </label>
+    <br />
+
+    <label>
+      description
+      <div>
+        <textarea
+          [(ngModel)]="trail.description"
+          name="description"
+          rows="8"
+          placeholder="I'm so excited for this rough and tough trail!"
+          ></textarea>
+        </div>
+      </label>
+    <br />
+    
+    <button type="button" (click)="cancel()">❌ Cancel</button>
+    <button type="button" (click)="onSubmit(newTrailForm)">{{ trail.id ? '✔️ Update' : '➕ Create' }}</button>
+  </form>
+</div>
+}

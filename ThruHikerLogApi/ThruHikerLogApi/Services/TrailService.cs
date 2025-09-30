@@ -3,7 +3,7 @@ using ThruHikerLogApi.Repos;
 
 namespace ThruHikerLogApi.Services
 {
-    public class TrailSerrvice(TrailRepo trailRepo, EntryRepo entryRepo)
+    public class TrailService(TrailRepo trailRepo, EntryRepo entryRepo)
     {
         private readonly TrailRepo _trailRepo = trailRepo;
         private readonly EntryRepo _entryRepo = entryRepo;
@@ -38,6 +38,16 @@ namespace ThruHikerLogApi.Services
             var entries = _entryRepo.GetEntriesByTrailId(id);
             trail.Entries = entries.ToList();
             return trail;
+        }
+
+        /// <summary>
+        /// Updates a trail
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updatedTrail"></param>
+        public void UpdateTrail(int id, Trail updatedTrail)
+        {
+            _trailRepo.UpdateTrail(id, updatedTrail);
         }
 
         /// <summary>

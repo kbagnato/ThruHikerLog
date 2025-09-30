@@ -11,7 +11,7 @@ import { TrailActions } from '../../../state';
   styleUrl: './create-trail.css',
 })
 export class CreateTrail {
-  constructor(private router: Router, private trailStore: Store) {}
+  constructor(private router: Router, private trailStore: Store) { }
 
   /** Reset end date to null */
   clearEndDate(form: NgForm) {
@@ -26,14 +26,14 @@ export class CreateTrail {
       return;
     }
 
-    const { name, startDate, endDate, length, notes, location, lengthType, gearListUrl } =
+    const { name, startDate, endDate, length, description, location, lengthType, gearListUrl } =
       form.value;
     const trail = {
       name,
       startDate: new Date(startDate),
       endDate: endDate ? new Date(endDate) : undefined,
       length: Number(length),
-      notes,
+      description,
       location,
       lengthType,
       gearListUrl,

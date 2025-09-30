@@ -13,7 +13,7 @@ export class TrailEffects {
     private trailService: TrailService,
     private router: Router,
     private coreState: Store
-  ) {}
+  ) { }
 
   loadTrails$ = createEffect(() => {
     return this.actions$.pipe(
@@ -33,41 +33,72 @@ export class TrailEffects {
       tap(() => this.coreState.dispatch(CoreActions.enableSpinner())),
       mergeMap((action) =>
         this.trailService.createTrail(action.trail).pipe(
-          map(() => TrailActions.createTrailSuccess()),
-          catchError((error) => of(TrailActions.createTrailFailure({ error })))
+          map(() => {
+            this.coreState.dispatch(CoreActions.disableSpinner());
+            this.router.navigate(['']);
+            return TrailActions.createTrailSuccess();
+          }),
+          catchError((error) => {
+            this.coreState.dispatch(CoreActions.disableSpinner());
+            return of(TrailActions.createTrailFailure({ error }));
+          })
         )
       )
     )
-  );
-
-  createTrailSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TrailActions.createTrailSuccess),
-      map(() => CoreActions.disableSpinner())
-    )
-  );
-
-  navigateToTrail$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(TrailActions.createTrailSuccess),
-        tap(() => this.router.navigate(['']))
-      ),
-    { dispatch: false }
   );
 
   getTrailDetails$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TrailActions.loadTrailDetails),
-      tap(() => CoreActions.enableSpinner()),
+      // tap(() => CoreActions.enableSpinner()), // TODO keep? or use skeletons?
       mergeMap((action) =>
         this.trailService.getTrailDetails(action.id).pipe(
           map(
-            (trail) => TrailActions.loadTrailDetailsSuccess({ trail }),
-            catchError((error) => of(TrailActions.loadTrailDetailsFailure({ error })))
-          )
+            (trail) => TrailActions.loadTrailDetailsSuccess({ trail })),
+          catchError((error) => of(TrailActions.loadTrailDetailsFailure({ error })))
         )
       )
     )
   );
+
+  updateTrail$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrailActions.updateTrail),
+      tap(() => this.coreState.dispatch(CoreActions.enableSpinner())),
+      mergeMap((action) =>
+        this.trailService.updateTrail(action.trail).pipe(
+          map(() => {
+            this.coreState.dispatch(CoreActions.disableSpinner());
+            this.router.navigate(['trail', action.trail.id]);
+            return TrailActions.updateTrailSuccess();
+          }),
+          catchError((error) => {
+            this.coreState.dispatch(CoreActions.disableSpinner());
+            return of(TrailActions.updateTrailFailure({ error }));
+          }),
+        )
+      ),
+    )
+  );
+
+  // deleteTrail$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(TrailActions.deleteTrail),
+  //     tap(() => this.coreState.dispatch(CoreActions.enableSpinner())),
+  //     mergeMap((action) =>
+  //       this.trailService.deleteTrail(action.id).pipe(
+  //         map(() => {
+  //           this.coreState.dispatch(CoreActions.disableSpinner());
+  //           this.router.navigate(['']);
+  //           return TrailActions.deleteTrailSuccess();
+  //         }
+  //         ),
+  //         catchError((error) => {
+  //           this.coreState.dispatch(CoreActions.disableSpinner());
+  //           return of(TrailActions.deleteTrailFailure({ error }))
+  //         })
+  //       )
+  //     )
+  //   )
+  // );
 }

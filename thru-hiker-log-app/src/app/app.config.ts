@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(),
-    provideStore({ trails: trailReducer, core: coreReducer, entry: entryReducer }),
+    provideStore({ trail: trailReducer, core: coreReducer, entry: entryReducer }),
     provideEffects([TrailEffects, EntryEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ]
