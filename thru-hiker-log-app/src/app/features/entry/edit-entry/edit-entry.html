@@ -3,6 +3,8 @@
   loading...
 } @else {
   <div class="card form">
+    <div class="title">{{ entry.id ? 'editing' : 'creating'}} entry</div>
+
     <form #newEntryForm="ngForm" name="newEntryForm" (ngSubmit)="onSubmit(newEntryForm)">
       <label>
         entry name
@@ -10,72 +12,72 @@
           <input type="text" [(ngModel)]="entry.name" name="name" required placeholder="anotha day in the office" />
         </div>
       </label>
-      <br />
 
-      <label>
-        start time
-        <div>
-          <input type="datetime-local" [(ngModel)]="entry.startTime" name="startTime" />
-        </div>
-      </label>
+      <div class="flex-wrap">
+        <label>
+          start time
+          <div>
+            <input type="datetime-local" [(ngModel)]="entry.startTime" name="startTime" />
+          </div>
+        </label>
+        
+        <label>
+          end time
+          <div>
+            <!-- todo add min time -->
+            <input type="datetime-local" [(ngModel)]="entry.endTime" name="endTime" />
+          </div>
+        </label>
+      </div>
+      
+      <div class="flex-wrap">
+        <label>
+          start mile marker
+          <div>
+            <input type="number" [(ngModel)]="entry.startMileage" name="startMileage" />
+          </div>
+        </label>
 
-      <label>
-        end time
-        <div>
-          <!-- todo add min time -->
-          <input type="datetime-local" [(ngModel)]="entry.endTime" name="endTime" />
-          <button type="button" (click)="clearEndTime(newEntryForm)">clear</button>
-        </div>
-      </label>
-      <br />
+        <label>
+          end mile marker
+          <div>
+            <input type="number" [(ngModel)]="entry.endMileage" name="endMileage" />
+          </div>
+        </label>
+      </div>  
 
-      <label>
-        start mileage
-        <div>
-          <input type="number" [(ngModel)]="entry.startMileage" name="startMileage" />
-        </div>
-      </label>
-      <br />
-
-      <label>
-        end mileage
-        <div>
-          <input type="number" [(ngModel)]="entry.endMileage" name="endMileage" />
-        </div>
-      </label>
-      <br />
-
-      <label>
-        elevation gain
-        <div>
-          <input type="number" [(ngModel)]="entry.elevationGain" name="elevationGain" />
-        </div>
-      </label>
-      <br />
-
-      <label>
-        elevation loss
-        <div>
-          <input type="number" [(ngModel)]="entry.elevationLoss" name="elevationLoss" />
-        </div>
-      </label>
-      <br />
+      <div class="flex-wrap">
+        <label>
+          elevation gain
+          <div>
+            <input type="number" [(ngModel)]="entry.elevationGain" name="elevationGain" />
+          </div>
+        </label>
+        
+        <label>
+          elevation loss
+          <div>
+            <input type="number" [(ngModel)]="entry.elevationLoss" name="elevationLoss" />
+          </div>
+        </label>
+      </div>
 
       <label>
         notes
         <div>
           <textarea
-            [(ngModel)]="entry.notes"
-            name="notes"
+          [(ngModel)]="entry.notes"
+          name="notes"
             rows="8"
             placeholder="Wowza, unexpected midday snow storm!"
-          ></textarea>
-        </div>
-      </label>
-      <br />
+            ></textarea>
+          </div>
+        </label>
 
-      <button type="button" (click)="cancel()">❌ Cancel</button>
-      <button type="button" (click)="onSubmit(newEntryForm)">{{ entry.id ? '✔️ Update' : '➕ Create'}}</button>
+        <div class="flex-wrap">
+        <button type="button" (click)="cancel()">❌ Cancel</button>
+        <button type="button" (click)="onSubmit(newEntryForm)">{{ entry.id ? '✔️ Update' : '➕ Create'}}</button>
+      </div>
     </form>
   </div>
 }

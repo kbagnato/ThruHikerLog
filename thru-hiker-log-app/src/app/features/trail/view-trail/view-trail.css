@@ -1,5 +1,4 @@
 .entry {
-  background-color: #B49898;
   font-size: 1.3rem;
   margin-bottom: 1rem;
 }
@@ -15,11 +14,14 @@
 }
 
 .details {
-  background-color: #B49898;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1rem;
+}
+
+.details > div:first-of-type {
+  max-width: 50%;
 }
 
 .trail-btns {
@@ -29,12 +31,14 @@
   margin: 0rem; 
 }
 
+.detail {
+  margin-bottom: 0.5rem;
+}
+
 .label {
-  font-size: 1.2rem;
-  font-style: italic;
   display: block;
 }
 
-.detail {
-  margin-bottom: 0.5rem;
+.search {
+  margin: 1rem;
 }

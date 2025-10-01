@@ -26,7 +26,7 @@ export class EditTrail {
       this.store.dispatch(TrailActions.loadTrailDetails({ id: this.id }));
 
       this.trail$ = this.store.select(selectTrailDetails).pipe(
-        map(trail => trail ? { ...trail } : {})
+        map(trail => trail ? { ...trail, id: this.id } : {})
       );
     }
   }
@@ -48,10 +48,11 @@ export class EditTrail {
   }
 
 
-  /** Reset end date to null */
-  clearEndDate(form: NgForm) {
-    form.controls['endDate'].setValue(null);
-  }
+  /// DEPRECEATED the input has a clear button
+  // /** Reset end date to null */
+  // clearEndDate(form: NgForm) {
+  //   form.controls['endDate'].setValue(null);
+  // }
 
   /** Create or update a trail */
   onSubmit(form: NgForm) {

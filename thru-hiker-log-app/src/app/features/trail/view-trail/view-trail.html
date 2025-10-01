@@ -25,58 +25,60 @@
     </div>
 
     <div class="trail-btns">
-      <!-- <button type="button" (click)="goHome()">🏠 Home</button> -->
-      <button type="button" (click)="goToAddEntry()">➕ Add Entry</button>
       <button type="button" (click)="goToEditTrail()">✏️ Edit Trail</button>
       <button type="button" (click)="deleteTrail()">🗑️ Delete Trail</button>
     </div>
   </div>
   
-  @if (trail.entries) {
-  <div class="label center">You have {{ trail.entries.length }} total entries for this trip.</div>
+  @if (trail.entries) {    
+    <button type="button" (click)="goToAddEntry()" class="center">➕ Add Entry</button>
 
-  @for (entry of trail.entries; track entry.id) {
-    <div class="card entry">
-      <!-- entry buttons -->
-      <div class="float-right">
-        <button type="button" (click)="goToEditEntry(entry.id!)">✏️ Edit</button>
-        <button type="button" (click)="deleteTrail()">🗑️ Delete</button>
-      </div>
-
-      <div class="header">
-        Day {{ entry.daysFromStart }} - 
-     
-        <span>{{ entry.name }}</span>
-        <br/>
-        </div>
-        
-        <div>
-        {{ entry.startTime | date : 'mediumDate' }},
-        {{entry.startTime | date : 'shortTime'}} to {{ entry.endTime | date : 'shortTime' }}
-      </div>
-      <div>Distance: {{ entry.endMileage - entry.startMileage }} miles</div>
-      <!-- <div>Elevation Gain: {{ entry.elevationGain }} ft</div>
-      <div>Elevation Loss: {{ entry.elevationLoss }} ft</div>
-      <div>Location: {{ entry.location }}</div>
-      <div>Weather: {{ entry.weather }}</div> -->
-      <br/>
-      <div>
-        Notes:
-        {{ entry.notes }}
-      </div>
+    <div class="search">
+      <input type="text" placeholder="Search entries..." disabled class="disabled"/>
     </div>
-  } 
 
-  <div>
-    <!-- TODO add pagination <br/> -->
-    <!-- <button type="button" (click)="previousPage()" [disabled]="pageNumber === 1">◀ Previous</button>
-    <button type="button" (click)="nextPage()" [disabled]="(trail.entries.length < pageSize)">Next ▶</button>
-    Page {{ pageNumber }} <br/> -->
-    <button type="button" disabled class="disabled">◀ Previous</button>
-    Page 1 
-    <button type="button" disabled class="disabled">Next ▶</button>
-  </div>
-} @else {
+    @for (entry of trail.entries; track entry.id) {
+      <div class="card entry">
+        <!-- entry buttons -->
+        <div class="float-right">
+          <button type="button" (click)="goToEditEntry(entry.id!)">✏️ Edit</button>
+          <button type="button" (click)="deleteTrail()">🗑️ Delete</button>
+        </div>
+
+        <div class="header">
+          Day {{ entry.daysFromStart }} - 
+      
+          <span>{{ entry.name }}</span>
+          <br/>
+          </div>
+          
+          <div>
+          {{ entry.startTime | date : 'mediumDate' }},
+          {{entry.startTime | date : 'shortTime'}} to {{ entry.endTime | date : 'shortTime' }}
+        </div>
+        <div>Distance: {{ entry.endMileage - entry.startMileage }} miles</div>
+        <!-- <div>Elevation Gain: {{ entry.elevationGain }} ft</div>
+        <div>Elevation Loss: {{ entry.elevationLoss }} ft</div>
+        <div>Location: {{ entry.location }}</div>
+        <div>Weather: {{ entry.weather }}</div> -->
+        <br/>
+        <div>
+          Notes:
+          {{ entry.notes }}
+        </div>
+      </div>
+    } 
+
+    <div>
+      <!-- TODO add pagination <br/> -->
+      <!-- <button type="button" (click)="previousPage()" [disabled]="pageNumber === 1">◀ Previous</button>
+      <button type="button" (click)="nextPage()" [disabled]="(trail.entries.length < pageSize)">Next ▶</button>
+      Page {{ pageNumber }} <br/> -->
+      <button type="button" disabled class="disabled">◀ Previous</button>
+      Page 1 
+      <button type="button" disabled class="disabled">Next ▶</button>
+    </div>
+  } @else {
    <div>you have no entries for this trail</div>
   }
 

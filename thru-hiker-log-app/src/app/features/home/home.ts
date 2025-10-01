@@ -15,9 +15,8 @@ import { selectAllTrails } from '../../state/trail/trail.selectors';
 })
 export class Home {
   public trails$?: Observable<ITrail[] | null>;
-  public selectedTrailId: number | null = null;
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store, private router: Router) { }
 
   ngOnInit() {
     this.trails$ = this.store.select(selectAllTrails);
@@ -29,20 +28,13 @@ export class Home {
     this.router.navigate(['/trail/create']);
   }
 
-  /** Toggle selected trail id */
-  toggleDropdown(trailId: number) {
-    this.selectedTrailId = this.selectedTrailId === trailId ? null : trailId;
-  }
-
-  /** Navigate to edit page for the selected trail */
-  editTrail(trail: ITrail): void {
-    this.selectedTrailId = null;
+  /** Navigate to view page for the selected trail */
+  viewTrail(trail: ITrail): void {
     this.router.navigate(['/trail', trail.id]);
   }
 
   /** Placeholder for delete action */
   deleteTrail(trail: ITrail) {
-    this.selectedTrailId = null;
     alert('you wanna delete ' + trail.name + '?');
   }
 }

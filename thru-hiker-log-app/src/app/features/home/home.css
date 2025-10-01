@@ -1,18 +1,17 @@
-.container {
-  display: flex;
+.title {
+  font-size: 3rem;
+  margin-bottom: 0rem;
 }
 
-.sidebar {
-  width: 35rem;
-  background-color: #B49898;
-}
-
-.content {
-  margin: 0 auto;
+.subtitle {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  margin-bottom: 2rem;
 }
 
 .trail {
-  padding: 1rem;
+  border-radius: 2rem;
+  padding: 3rem 1rem;
   margin: 1rem 0;
   background-color: #472E2E;
   color: white;
@@ -23,15 +22,4 @@
 .trail:hover {
   cursor: pointer;
   background-color: #924444;
-}
-
-.dropdown {
-  display: flex;
-  flex-direction: column;
-  background: #f0f0f0;
-  border: 1px solid #ddd;
-  position: absolute;
-  margin-top: 4px;
-  padding: 4px;
-  border-radius: 4px;
 }

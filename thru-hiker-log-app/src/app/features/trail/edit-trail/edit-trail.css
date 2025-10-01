@@ -1,3 +1,11 @@
-.card {
-  background-color: #B49898;
+.form {
+  width: 50rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.flex-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

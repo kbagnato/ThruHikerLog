@@ -1,6 +1,5 @@
 body {
   background-color: #D9D9D9;
-  font-size: 1.5rem;
   color: #472e2e;
   font-family: sans-serif;
 }
@@ -19,27 +18,16 @@ body {
 }
 
 /* page components */
-.name {
-  margin: 3rem 1rem;
+.title {
+  margin: 1.5rem 1rem;
+  font-size: 2rem;
   font-weight: bold;
   font-family: sans-serif;
 }
 
-.card {
-  /* border-style: outset; */
-  border: 0.2rem ridge #472e2e;
-  border-radius: 1rem;
-  padding: 1rem;
-  overflow: auto;
-}
-
-.form {
-  width: max-content;
-  line-height: 2rem;
-}
-
-.form button {
-  margin-right: 1rem;
+label {
+  font-size: 1.2rem;
+  font-style: italic;
 }
 
 button {
@@ -53,4 +41,28 @@ button {
 button:hover {
   background-color: #924444;
   color: white;
+}
+
+.card {
+  background-color: #B49898;
+  border: 0.2rem ridge #472e2e;
+  border-radius: 1rem;
+  padding: 1rem;
+  overflow: auto;
+}
+
+/* form stuff */
+.form {
+  width: max-content;
+  line-height: 2rem;
+}
+
+input { 
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+textarea {
+  font-size: 1.5rem;
+  width: 100%;
 }
