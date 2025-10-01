@@ -16,7 +16,7 @@ namespace ThruHikerLogApi.Repos
             using var connection = new SqliteConnection(connectionString);
             connection.Open();
             using var command = connection.CreateCommand();
-            command.CommandText = "SELECT Id, Name, Location, Length, LengthType, Description, GearListUrl, StartDate, EndDate FROM Trails";
+            command.CommandText = "SELECT Id, Name, Location, Length, LengthType, Description, GearListUrl, StartDate, EndDate FROM Trails WHERE IsActive = 1";
             command.CommandType = System.Data.CommandType.Text;
             using var reader = command.ExecuteReader();
             while (reader.Read())
@@ -41,8 +41,8 @@ namespace ThruHikerLogApi.Repos
             connection.Open();
             using var command = connection.CreateCommand();
             command.CommandText = @"
-                INSERT INTO Trails (Name, Location, Length, LengthType, Description, GearListUrl, StartDate, EndDate)
-                VALUES ($name, $location, $length, $lengthType, $description, $gearListUrl, $startDate, $endDate);
+                INSERT INTO Trails (Name, Location, Length, LengthType, Description, GearListUrl, StartDate, EndDate, IsActive)
+                VALUES ($name, $location, $length, $lengthType, $description, $gearListUrl, $startDate, $endDate, 1);
                 SELECT last_insert_rowid();
             ";
             command.CommandType = System.Data.CommandType.Text;

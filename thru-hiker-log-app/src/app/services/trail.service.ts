@@ -28,4 +28,9 @@ export class TrailService {
   updateTrail(trail: ITrail): Observable<void> {
     return this.http.put<void>(this.baseUrl + '/' + trail.id, trail);
   }
+
+  /** Delete a trail */
+  deleteTrail(id: number): Observable<void> {
+    return this.http.delete<void>(this.baseUrl + '/' + id);
+  }
 }

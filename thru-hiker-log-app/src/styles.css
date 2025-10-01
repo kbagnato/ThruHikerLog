@@ -14,6 +14,10 @@ body {
   cursor: not-allowed;
 }
 
+.center {
+  text-align: center;
+}
+
 /* page components */
 .name {
   margin: 3rem 1rem;
@@ -22,7 +26,8 @@ body {
 }
 
 .card {
-  border-style: outset;
+  /* border-style: outset; */
+  border: 0.2rem ridge #472e2e;
   border-radius: 1rem;
   padding: 1rem;
   overflow: auto;

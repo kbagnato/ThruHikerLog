@@ -86,7 +86,7 @@ export class EntryEffects {
         this.entryService.deleteEntry(action.trailId, action.entryId).pipe(
           map(() => {
             this.store.dispatch(CoreActions.disableSpinner());
-            return EntryActions.deleteEntrySuccess()
+            return EntryActions.loadEntriesByTrailId({ id: action.trailId });
           }),
           catchError((error) => {
             this.store.dispatch(CoreActions.disableSpinner());

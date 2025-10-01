@@ -49,8 +49,12 @@ export class ViewTrail {
     this.router.navigate(['trail', this.id, 'edit']);
   }
 
-  /** Delete an entry */
-  deleteEntry(entryId: number) {
-    alert('delete entry - todo');
+  /** Delete a trail */
+  deleteTrail() {
+    // TODO create popup to confirm delete
+    if (this.id &&
+      window.confirm('Are you sure you want to delete this trail and all associated entries?')) {
+      this.store.dispatch(TrailActions.deleteTrail({ id: this.id }));
+    }
   }
 }

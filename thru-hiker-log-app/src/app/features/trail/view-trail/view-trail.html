@@ -7,17 +7,18 @@
       <div class="trail-name">
         {{ trail.name }}
       </div>
-      {{ trail.location }} <br />  
+      {{ trail.location }} <br /><br />
 
       <div>
-        Description: {{ trail.description }}
+        <span class='label'>Description:</span>{{ trail.description }}
       </div>
     </div>
     
     <div>
-      Start Date: {{ trail.startDate | date : 'longDate' }} <br />
-      End Date: {{ trail.endDate | date : 'longDate' }} <br />
-      Total Distance: {{ trail.length }} {{trail.lengthType }} <br />
+      <div class='detail'><span class='label'>Start Date:</span>{{ trail.startDate | date : 'longDate' }}<br /></div>
+      <div class='detail'><span class='label'>End Date:</span>{{ trail.endDate | date : 'longDate' }}<br /></div>
+      <div class='detail'><span class='label'>Total Distance:</span>{{ trail.length }} {{trail.lengthType }}<br /></div>
+      <div class='detail'><span class='label'>Gear List:</span>{{ trail.gearListUrl }}<br /></div>
       <!-- TODO add these fields -->
       <!-- Total Elevation Gain: {{ trail.totalElevationGain }} ft<br />
       Total Elevation Loss: {{ trail.totalElevationLoss }} ft<br /> -->
@@ -25,24 +26,25 @@
 
     <div class="trail-btns">
       <!-- <button type="button" (click)="goHome()">🏠 Home</button> -->
-      <button type="button" (click)="goToEditTrail()">✏️ Edit Trail</button>
       <button type="button" (click)="goToAddEntry()">➕ Add Entry</button>
+      <button type="button" (click)="goToEditTrail()">✏️ Edit Trail</button>
+      <button type="button" (click)="deleteTrail()">🗑️ Delete Trail</button>
     </div>
   </div>
   
   @if (trail.entries) {
-  <div>You have {{ trail.entries.length }} total entries for this trail.</div>
+  <div class="label center">You have {{ trail.entries.length }} total entries for this trip.</div>
 
   @for (entry of trail.entries; track entry.id) {
     <div class="card entry">
       <!-- entry buttons -->
       <div class="float-right">
         <button type="button" (click)="goToEditEntry(entry.id!)">✏️ Edit</button>
-        <button type="button" (click)="deleteEntry(entry.id!)">🗑️ Delete</button>
+        <button type="button" (click)="deleteTrail()">🗑️ Delete</button>
       </div>
 
       <div class="header">
-        Day {{ entry.dayNumber }} - 
+        Day {{ entry.daysFromStart }} - 
      
         <span>{{ entry.name }}</span>
         <br/>
@@ -66,7 +68,7 @@
   } 
 
   <div>
-    TODO add pagination <br/>
+    <!-- TODO add pagination <br/> -->
     <!-- <button type="button" (click)="previousPage()" [disabled]="pageNumber === 1">◀ Previous</button>
     <button type="button" (click)="nextPage()" [disabled]="(trail.entries.length < pageSize)">Next ▶</button>
     Page {{ pageNumber }} <br/> -->

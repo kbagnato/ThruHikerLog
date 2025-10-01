@@ -11,5 +11,5 @@ export interface IEntry {
   weather?: string;
   temperature?: number;
   notes?: string;
-  dayNumber?: number; // computed field, not stored in DB
+  daysFromStart?: number; // computed field, not stored in DB
 }

@@ -81,24 +81,24 @@ export class TrailEffects {
     )
   );
 
-  // deleteTrail$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(TrailActions.deleteTrail),
-  //     tap(() => this.coreState.dispatch(CoreActions.enableSpinner())),
-  //     mergeMap((action) =>
-  //       this.trailService.deleteTrail(action.id).pipe(
-  //         map(() => {
-  //           this.coreState.dispatch(CoreActions.disableSpinner());
-  //           this.router.navigate(['']);
-  //           return TrailActions.deleteTrailSuccess();
-  //         }
-  //         ),
-  //         catchError((error) => {
-  //           this.coreState.dispatch(CoreActions.disableSpinner());
-  //           return of(TrailActions.deleteTrailFailure({ error }))
-  //         })
-  //       )
-  //     )
-  //   )
-  // );
+  deleteTrail$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrailActions.deleteTrail),
+      tap(() => this.coreState.dispatch(CoreActions.enableSpinner())),
+      mergeMap((action) =>
+        this.trailService.deleteTrail(action.id).pipe(
+          map(() => {
+            this.coreState.dispatch(CoreActions.disableSpinner());
+            this.router.navigate(['']);
+            return TrailActions.deleteTrailSuccess();
+          }
+          ),
+          catchError((error) => {
+            this.coreState.dispatch(CoreActions.disableSpinner());
+            return of(TrailActions.deleteTrailFailure({ error }))
+          })
+        )
+      )
+    )
+  );
 }

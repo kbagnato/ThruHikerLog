@@ -21,7 +21,7 @@ namespace ThruHikerLogApi.Repos
             command.CommandText = @"
                 SELECT Id, TrailId, Name, StartTime, EndTime, StartMileage, EndMileage, Notes 
                 FROM Entries 
-                WHERE TrailId = $trailId
+                WHERE TrailId = $trailId AND IsActive = 1
                 ORDER BY StartTime DESC
             ";
             command.CommandType = System.Data.CommandType.Text;
@@ -93,7 +93,7 @@ namespace ThruHikerLogApi.Repos
         /// </summary>
         /// <param name="updatedEntry"></param>
         /// <returns></returns>
-        public Entry UpdateEntry(int entryId, int trailId, Entry updatedEntry)
+        public Entry UpdateEntry(int trailId, int entryId, Entry updatedEntry)
         {
             var connectionString = "Data Source=thruhikerlog.db";
             using var connection = new SqliteConnection(connectionString);

@@ -16,8 +16,8 @@
 
 .details {
   background-color: #B49898;
-  display: grid ;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1rem;
 }
@@ -27,4 +27,14 @@
   flex-direction: column;
   gap: 1rem;
   margin: 0rem; 
+}
+
+.label {
+  font-size: 1.2rem;
+  font-style: italic;
+  display: block;
+}
+
+.detail {
+  margin-bottom: 0.5rem;
 }
